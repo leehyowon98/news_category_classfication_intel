@@ -18,7 +18,7 @@ url ='https://news.naver.com/section/100'
 # print(len(title_tags))
 # for title_tags in title_tags:
 #     print(title_tags.text)
-
+# 추가
 df_titles = pd.DataFrame()
 
 #코드설명 주소별 하나씩 받고 한글만 하고 받아서 카테고리마다 라벨붙이고 df_title에 빈거에 채워넣어서 출력
