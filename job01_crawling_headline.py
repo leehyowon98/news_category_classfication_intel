@@ -23,7 +23,7 @@ df_titles = pd.DataFrame()
 
 #코드설명 주소별 하나씩 받고 한글만 하고 받아서 카테고리마다 라벨붙이고 df_title에 빈거에 채워넣어서 출력
 
-for i in range(6):
+for i in range(3,5):
     url = 'https://news.naver.com/section/10{}'.format(i)
     resp = requests.get(url)
     soup = BeautifulSoup(resp.text, 'html.parser')
