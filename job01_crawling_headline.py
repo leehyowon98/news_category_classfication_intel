@@ -9,16 +9,6 @@ category = ['Politics', 'Economic', 'Social', 'Culture', 'World', 'IT']
 
 url ='https://news.naver.com/section/100'
 
-# resp = requests.get(url)
-# print(list(resp))  # 브라우저가 해당하는 주소에 요청을 하고 응답을 한다 응답을 페이지로 응답한다.
-#
-# soup = BeautifulSoup(resp.text, 'html.parser') #parser가 html형식으로 바꿔준다
-# print(soup)
-# title_tags = soup.select('.sa_text_strong')
-# print(len(title_tags))
-# for title_tags in title_tags:
-#     print(title_tags.text)
-# 추가
 df_titles = pd.DataFrame()
 
 #코드설명 주소별 하나씩 받고 한글만 하고 받아서 카테고리마다 라벨붙이고 df_title에 빈거에 채워넣어서 출력
