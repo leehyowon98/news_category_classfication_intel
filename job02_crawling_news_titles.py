@@ -26,10 +26,10 @@ if not os.path.exists('./crawling_data_2'):
 
 # 뉴스 카테고리별 URL과 XPath 설정
 categories = {
-    #'100': {'name': 'Politics', 'xpath_type': 'normal'},
-    #'101': {'name': 'Economic', 'xpath_type': 'economic'},
-    #'102': {'name': 'Social', 'xpath_type': 'normal'},
-    #'103': {'name': 'Culture', 'xpath_type': 'normal'},
+    '100': {'name': 'Politics', 'xpath_type': 'normal'},
+    '101': {'name': 'Economic', 'xpath_type': 'economic'},
+    '102': {'name': 'Social', 'xpath_type': 'normal'},
+    '103': {'name': 'Culture', 'xpath_type': 'normal'},
     '104': {'name': 'World', 'xpath_type': 'normal'},
     '105': {'name': 'IT', 'xpath_type': 'normal'}
 }
@@ -47,7 +47,11 @@ for cat_num, cat_info in categories.items():
     time.sleep(1)
 
     # 더보기 버튼 클릭
-    button_xpath = '//*[@id="newsct"]/div[4]/div/div[2]'
+    if xpath_type == 'economic':
+        button_xpath = '//*[@id="newsct"]/div[5]/div/div[2]/a'  # 경제 카테고리용 버튼 XPath
+    else:
+        button_xpath = '//*[@id="newsct"]/div[4]/div/div[2]'  # 다른 카테고리용 버튼 XPath
+
     for _ in range(15):
         try:
             time.sleep(0.5)
@@ -63,8 +67,10 @@ for cat_num, cat_info in categories.items():
         for i in range(1, 98):
             for j in range(1, 7):
                 try:
-                    title_xpath = f'//*[@id="newsct"]/div[2]/div/div[2]/ul/li[{j}]/div[2]/a'
+                    title_xpath = f'//*[@id="newsct"]/div[5]/div/div[1]/div[{i}]/ul/li[{j}]/div/div/div[2]/a/strong'
                     title = driver.find_element(By.XPATH, title_xpath).text
+                    # 한글과 공백만 남기고 제거
+                    title = re.compile('[^가-힣 ]').sub(' ', title)
                     titles.append({
                         'title': title,
                         'category': cat_name
@@ -79,6 +85,8 @@ for cat_num, cat_info in categories.items():
                 try:
                     title_xpath = f'//*[@id="newsct"]/div[4]/div/div[1]/div[{i}]/ul/li[{j}]/div/div/div[2]/a/strong'
                     title = driver.find_element(By.XPATH, title_xpath).text
+                    # 한글과 공백만 남기고 제거
+                    title = re.compile('[^가-힣 ]').sub(' ', title)
                     titles.append({
                         'title': title,
                         'category': cat_name
